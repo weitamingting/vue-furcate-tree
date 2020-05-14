@@ -63,22 +63,24 @@ const renderNode = (h, context, nodeData) => {
 
 // 渲染class为vue-ftree-node-content的dom
 const renderContent = (h, context, nodeData) => {
+  const listeners = {}
+  const contextListeners = context.listeners
+  if(contextListeners.expand){
+    listeners.click = function() {
+      nodeData.expand = !nodeData.expand
+      // 监听触发展开收缩事件
+      contextListeners.expand({
+        nodeData,
+        expanded: nodeData.expand
+      })
+    }
+  }
   return h('div', {
     class: {
       'vue-ftree-node-content': true,
       'vue-ftree-expand': nodeData.expand
     },
-    on: {
-      // 展开收缩
-      click: function() {
-        nodeData.expand = !nodeData.expand
-        // 监听触发展开收缩时间
-        context.listeners.expand({
-          nodeData,
-          expanded: nodeData.expand
-        })
-      }
-    }
+    on: listeners
   },
   [renderContentInner(h, context, nodeData)])
 }
@@ -121,16 +123,20 @@ const renderContentInner = (h, context, nodeData) => {
   // 当自定义了渲染函数时按照自定义方式渲染
   if(renderFunction && Object.prototype.toString.call(renderFunction) === '[object Function]') {
     const innerHTML = renderFunction(nodeData)
+    const listeners = {}
+    const contextListeners = context.listeners
+    if(contextListeners.click){
+      listeners.click = function() {
+        contextListeners.click(nodeData, event)
+      }
+    }
+
     return h('div', {
       class: ['vue-ftree-node-content-inner'],
       domProps: {
         innerHTML
       },
-      on: {
-        click: function(event) {
-          context.listeners.click(nodeData, event)
-        }
-      }
+      on: listeners
     }, [])
   }
   // 将组件slot作为模板，需要深拷贝
@@ -140,7 +146,9 @@ const renderContentInner = (h, context, nodeData) => {
     class: ['vue-ftree-node-content-inner'],
     on: {
       click: function(event) {
-        context.listeners.click(nodeData, event)
+        if(context.listeners.click) {
+          context.listeners.click(nodeData, event)
+        }
       }
     }
   }, renderTemplate(slotTemplate, nodeData))

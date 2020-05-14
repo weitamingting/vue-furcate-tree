@@ -39,21 +39,21 @@ export default {
               expand: false,
               children: [
                 {
-                  id: 2,
+                  id: 3,
                   label: '节点3',
                   test: {
                     a: '出'
                   }
                 },
                 {
-                  id: 2,
+                  id: 4,
                   label: '节点3',
                   test: {
                     a: '出'
                   }
                 },
                 {
-                  id: 2,
+                  id: 5,
                   label: '节点3',
                   test: {
                     a: '出'
@@ -78,7 +78,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-  @import './assets/style.scss'
-</style>

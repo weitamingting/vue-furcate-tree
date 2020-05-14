@@ -1,7 +1,7 @@
 <template>
   <div class="vue-ftree-node-wrapper">
     <div
-      v-for="(item, index) in nodeData"
+      v-for="item in nodeData"
       :key="item.id"
       class="vue-ftree-node"
       :class="{'has-children': item.children && item.children.length > 0}"
