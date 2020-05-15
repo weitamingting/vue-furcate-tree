@@ -1,6 +1,8 @@
 # vue-furcate-tree
 vue分叉树、组织架构图组件，支持使用模板语法来定义每个节点内容
 
+[效果演示](https://weitamingting.github.io/vue-furcate-tree/ "效果演示")
+
 ## 使用
 ```js
 <VueFurcateTree 
