@@ -41,37 +41,35 @@ npm install --save vue-furcate-tree
 ```js
 [
     {
-        id: 0,          // 必须的，一个唯一标识，用于遍历node时为vnode的key
         expand: true,   // 必须的，表示子级节点是否展开
         label: '节点1', // 你的自定义属性，将来可用于在模板变量
         test: {         // 你的自定义属性
             a: 'b'      // 你的自定义属性，可以在模板中使用test.a方式访问变量
         },
         children: [     // 可选的，子级节点数组
-            {
-                id: 1,
-                label: '节点2',
-                test: {
-                    a: 'b'
-                },
+          {
+            expand: false,
+            label: '节点2',
+            test: {
+              a: 'b'
+            },
+            children: [
+              {
                 expand: false,
-                children: [
-                    {
-                        id: 3,
-                        label: '节点3',
-                        test: {
-                            a: 'c'
-                        }
-                    },
-                    {
-                        id: 4,
-                        label: '节点3',
-                        test: {
-                            a: 'd'
-                        }
-                    }
-                ]
-            }
+                label: '节点3',
+                test: {
+                    a: 'c'
+                }
+              },
+              {
+                expand: false,
+                label: '节点3',
+                test: {
+                    a: 'd'
+                }
+              }
+            ]
+          }
         ]
     }
 ]
@@ -84,12 +82,11 @@ npm install --save vue-furcate-tree
 例如你的某个节点数据是这样
 ```js
 {
-    id: 1,
-    label: '节点1',
-    test: {
-        a: 'b'
-    },
-    children: [...]
+  label: '节点1',
+  test: {
+      a: 'b'
+  },
+  children: [...]
 }
 ```
 那么在组件插槽中这样使用就可以访问到节点属性
@@ -116,7 +113,7 @@ npm install --save vue-furcate-tree
 ## 属性
 | 属性名称 | 类型 | 说明 |
 | ---------- | ---------- | ----------- |
-| `ftData` | `Array` | 一个有父子级关系的节点对象数组，每个节点对象必须有两个属性：id和expand，具体上方用法注释 |
+| `ftData` | `Array` | 一个有父子级关系的节点对象数组，每个节点对象必须有属性`expand`，具体上方用法注释 |
 | `expandable` | `Boolean` | 是否允许点击节点展开/收缩子级节点 |
 | `expandAll` | `Boolean` | 是否展开/收缩全部节点，`true`为展开全部，`false`为收缩全部 |
 | `renderFunc` | `Function` | 函数式渲染节点方法，返回值为字符串，字符串中可以包含html标签，此处本质是dom.innerHTML，参数为当前节点的数据对象。更灵活，但更复杂。`注意：如果有了此属性，模板编译方式会失效` |
@@ -167,7 +164,6 @@ export default {
       collapseAllStatus: false,
       ftData: [
         {
-          id: 0,
           label: '节点1',
           test: {
             a: 'a'
@@ -175,7 +171,6 @@ export default {
           expand: true,
           children: [
             {
-              id: 1,
               label: '节点2',
               test: {
                 a: 'b'
@@ -183,7 +178,6 @@ export default {
               expand: false,
               children: [
                 {
-                  id: 3,
                   label: '节点3',
                   expand: false,
                   test: {
@@ -191,7 +185,6 @@ export default {
                   }
                 },
                 {
-                  id: 4,
                   label: '节点3',
                   expand: false,
                   test: {
@@ -199,7 +192,6 @@ export default {
                   }
                 },
                 {
-                  id: 5,
                   label: '节点3',
                   expand: false,
                   test: {

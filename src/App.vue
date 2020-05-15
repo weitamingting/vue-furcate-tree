@@ -28,7 +28,6 @@ export default {
       collapseAllStatus: false,
       ftData: [
         {
-          id: 0,
           label: '节点1',
           test: {
             a: 'a'
@@ -36,7 +35,6 @@ export default {
           expand: true,
           children: [
             {
-              id: 1,
               label: '节点2',
               test: {
                 a: 'b'
@@ -44,7 +42,6 @@ export default {
               expand: false,
               children: [
                 {
-                  id: 3,
                   label: '节点3',
                   expand: false,
                   test: {
@@ -52,7 +49,6 @@ export default {
                   }
                 },
                 {
-                  id: 4,
                   label: '节点3',
                   expand: false,
                   test: {
@@ -60,7 +56,6 @@ export default {
                   }
                 },
                 {
-                  id: 5,
                   label: '节点3',
                   expand: false,
                   test: {
