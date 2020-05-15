@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <button class="expand-all" @click="expandAllMethod()">全部展开</button>
     <VueFurcateTree 
       :ft-data="ftData" 
       :render-func="renderDom" 
@@ -11,7 +12,6 @@
       我是#{label}
       <em>#{test.a}</em>
     </VueFurcateTree>
-  <button @click="expandAllMethod()">全部展开</button>
   </div>
 </template>
 
@@ -89,3 +89,16 @@ export default {
   }
 }
 </script>
+
+<style>
+  .expand-all{
+    display: block;
+    padding: 10px 30px;
+    color: #ffffff;
+    background-color: #ff9900;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(255, 153, 0, .6);
+    margin: 20px auto;
+  }
+</style>
