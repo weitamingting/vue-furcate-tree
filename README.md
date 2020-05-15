@@ -42,7 +42,7 @@ npm install --save vue-furcate-tree
 [
     {
         expand: true,   // 必须的，表示子级节点是否展开
-        label: '节点1', // 你的自定义属性，将来可用于在模板变量
+        label: '节点1', // 你的自定义属性，将来可在模板中作为变量
         test: {         // 你的自定义属性
             a: 'b'      // 你的自定义属性，可以在模板中使用test.a方式访问变量
         },
