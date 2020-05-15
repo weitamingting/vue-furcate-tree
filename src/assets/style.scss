@@ -1,7 +1,7 @@
 $borderColor: #cccccc;
 $childrenSpace: 40px;
 $nodeBgColor: #ffffff;
-$lineColor: #ff6600;
+$lineColor: #cccccc;
 $triangleSize: 10px;
 .vue-ftree{
     display: flex;
@@ -48,7 +48,10 @@ $triangleSize: 10px;
             padding: 0 10px;
             .vue-ftree-node-content-inner{
                 border: 1px solid $borderColor;
+                padding: 5px 10px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, .2);
                 position: relative;
+                cursor: pointer;
                 background-color: $nodeBgColor;
                 &::before{
                     content: '';

@@ -1,8 +1,10 @@
 <template>
   <div class="vue-ftree-wrapper">
     <vueFtNode 
-      :node-data="ftData" 
+      :ft-data="ftData" 
       :render-func="renderFunc"
+      :expandable="expandable"
+      :expand-all="expandAllCopy"
       @click="$listeners.click"
       @expand="$listeners.expand"
     >
@@ -22,8 +24,19 @@ export default {
       default: () => [],
       required: true
     },
+    expandable: {
+      type: Boolean,
+      default: () => true,
+      required: false
+    },
+    expandAll: {
+      type: Boolean,
+      default: () => false,
+      required: false
+    },
     renderFunc: {
-      type: Function
+      type: Function,
+      required: false
     }
   },
   components: {
@@ -35,8 +48,15 @@ export default {
   },
   data() {
     return {
-
+      expandAllCopy: this.expandAll
     }
+  },
+  watch: {
+    expandAll() {
+      this.expandAllCopy = this.expandAll
+    }
+  },
+  methods: {
   }
 }
 </script>

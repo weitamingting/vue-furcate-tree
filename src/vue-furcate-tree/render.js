@@ -10,6 +10,8 @@
  * @param {Object} context 
  * @param {Array} nodeListData 父组件传入的props
  */
+let isExpandAllDisabled = false
+
 const renderTree = (h, context, nodeListData) => {
   if(!nodeListData && nodeListData.length < 0) {
     return
@@ -65,8 +67,17 @@ const renderNode = (h, context, nodeData) => {
 const renderContent = (h, context, nodeData) => {
   const listeners = {}
   const contextListeners = context.listeners
-  if(contextListeners.expand){
+  const contextProps = context.props
+  const expandable = contextProps.expandable
+  let expandAll = contextProps.expandAll
+
+  // 判断为是鼠标点击节点触发的展开收缩时，让expandAll失效
+  if(!isExpandAllDisabled) {
+    nodeData.expand = expandAll
+  }
+  if(contextListeners.expand && expandable){
     listeners.click = function() {
+      isExpandAllDisabled = true
       nodeData.expand = !nodeData.expand
       // 监听触发展开收缩事件
       contextListeners.expand({
@@ -198,8 +209,9 @@ const renderTemplate = (template, nodeData) => {
 
 const render = (h, context) => {
   const { props } = context
-  const nodeData = props.nodeData
+  const nodeData = props.ftData
   const nodes = renderTree(h, context, nodeData)
+  isExpandAllDisabled = false
 
   return h('div', {
     class: ['vue-ftree']

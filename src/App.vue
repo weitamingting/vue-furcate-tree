@@ -3,12 +3,15 @@
     <VueFurcateTree 
       :ft-data="ftData" 
       :render-func="renderDom" 
+      :expandable="true"
+      :expand-all="expandAllStatus"
       @click="click"
       @expand="expand"
     >
       我是#{label}
       <em>#{test.a}</em>
     </VueFurcateTree>
+  <button @click="expandAllMethod()">全部展开</button>
   </div>
 </template>
 
@@ -21,6 +24,8 @@ export default {
   },
   data () {
     return {
+      expandAllStatus: true,
+      collapseAllStatus: false,
       ftData: [
         {
           id: 0,
@@ -41,6 +46,7 @@ export default {
                 {
                   id: 3,
                   label: '节点3',
+                  expand: false,
                   test: {
                     a: '出'
                   }
@@ -48,6 +54,7 @@ export default {
                 {
                   id: 4,
                   label: '节点3',
+                  expand: false,
                   test: {
                     a: '出'
                   }
@@ -55,6 +62,7 @@ export default {
                 {
                   id: 5,
                   label: '节点3',
+                  expand: false,
                   test: {
                     a: '出'
                   }
@@ -67,6 +75,9 @@ export default {
     }
   },
   methods: {
+    expandAllMethod(){
+      this.expandAllStatus = !this.expandAllStatus
+    },
     renderDom(nodeData) {
       return nodeData.label
     },
