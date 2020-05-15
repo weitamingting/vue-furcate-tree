@@ -31,7 +31,7 @@ export default {
           id: 0,
           label: '节点1',
           test: {
-            a: 'b'
+            a: 'a'
           },
           expand: true,
           children: [
@@ -48,7 +48,7 @@ export default {
                   label: '节点3',
                   expand: false,
                   test: {
-                    a: '出'
+                    a: 'c'
                   }
                 },
                 {
@@ -56,7 +56,7 @@ export default {
                   label: '节点3',
                   expand: false,
                   test: {
-                    a: '出'
+                    a: 'd'
                   }
                 },
                 {
@@ -64,7 +64,7 @@ export default {
                   label: '节点3',
                   expand: false,
                   test: {
-                    a: '出'
+                    a: 'e'
                   }
                 }
               ]

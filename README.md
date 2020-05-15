@@ -1,5 +1,5 @@
 # vue-furcate-tree
-vue分叉树、组织架构图组件，支持使用模板语法来定义每个节点渲染方式
+vue分叉树、组织架构图组件，支持使用模板语法来定义每个节点内容
 
 ## 使用
 ```js
@@ -91,7 +91,11 @@ vue分叉树、组织架构图组件，支持使用模板语法来定义每个�
 | 属性名称 | 类型 | 说明 |
 | ---------- | ---------- | ----------- |
 | `ftData` | `Array` | 一个有父子级关系的节点对象数组，每个节点对象必须有两个属性：id和expand，具体上方用法注释 |
+| `expandable` | `Boolean` | 是否允许点击节点展开/收缩子级节点 |
+| `expandAll` | `Boolean` | 是否展开/收缩全部节点，`true`为展开全部，`false`为收缩全部 |
 | `renderFunc` | `Function` | 函数式渲染节点方法，返回值为字符串，字符串中可以包含html标签，此处本质是dom.innerHTML，参数为当前节点的数据对象，`注意：如果有了此属性，模板编译方式会失效` |
+
+`renderFunc`示例，`nodeData`参数为每个节点的数据对象
 ```js
     renderFunc(nodeData) {
       return nodeData.label
@@ -110,9 +114,11 @@ vue分叉树、组织架构图组件，支持使用模板语法来定义每个�
 ```html
 <template>
   <div id="app">
+    <button class="expand-all" @click="expandAllMethod()">全部展开</button>
     <VueFurcateTree 
       :ft-data="ftData" 
-      :render-func="renderDom" 
+      :expandable="true"
+      :expand-all="expandAllStatus"
       @click="click"
       @expand="expand"
     >
@@ -131,6 +137,8 @@ export default {
   },
   data () {
     return {
+      expandAllStatus: true,
+      collapseAllStatus: false,
       ftData: [
         {
           id: 0,
@@ -151,6 +159,7 @@ export default {
                 {
                   id: 3,
                   label: '节点3',
+                  expand: false,
                   test: {
                     a: 'c'
                   }
@@ -158,6 +167,7 @@ export default {
                 {
                   id: 4,
                   label: '节点3',
+                  expand: false,
                   test: {
                     a: 'd'
                   }
@@ -165,6 +175,7 @@ export default {
                 {
                   id: 5,
                   label: '节点3',
+                  expand: false,
                   test: {
                     a: 'e'
                   }
@@ -177,6 +188,9 @@ export default {
     }
   },
   methods: {
+    expandAllMethod(){
+      this.expandAllStatus = !this.expandAllStatus
+    },
     renderDom(nodeData) {
       return nodeData.label
     },
