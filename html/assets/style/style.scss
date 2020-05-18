@@ -1,0 +1,101 @@
+$borderColor: #cccccc;
+$childrenSpace: 40px;
+$nodeBgColor: #ffffff;
+$lineColor: #ff6600;
+$triangleSize: 10px;
+.vue-ftree{
+    display: flex;
+    justify-content: center;
+    .vue-ftree-node{
+        position: relative;
+        flex: 1 1;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        &::before{
+            content: '';
+            display: block;
+            width: 50%;
+            height: $childrenSpace / 2;
+            border-top: 1px solid $lineColor;
+            border-right: 1px solid $lineColor;
+            position: absolute;
+            left: 0;
+            top: -$childrenSpace / 2;
+            flex-shrink: 0;
+        }
+        &::after{
+            content: '';
+            display: block;
+            width: 50%;
+            height: $childrenSpace / 2;
+            border-top: 1px solid $lineColor;
+            position: absolute;
+            right: 0;
+            top: -$childrenSpace / 2;
+            flex-shrink: 0;
+        }
+        &:first-child::before{
+            border-top-color: transparent;
+        }
+        &:last-child::after{
+            border-top-color: transparent;
+        }
+        &.vue-ftree-first-node{
+            &::before{
+                content: '';
+                display: none;
+            }
+            &::after{
+                content: '';
+                display: none;
+            }
+            & > .vue-ftree-node-content > .vue-ftree-node-content-inner{
+                &::before{
+                    display: none;
+                }
+            }
+        }
+        .vue-ftree-node-content{
+            display: inline-block;
+            .vue-ftree-node-content-inner{
+                border: 1px solid $borderColor;
+                padding: 10px;
+                position: relative;
+                background-color: $nodeBgColor;
+                &::before{
+                    content: '';
+                    display: block;
+                    width: $triangleSize;
+                    height: $triangleSize;
+                    border: $triangleSize/2 solid;
+                    box-sizing: border-box;
+                    border-color: $lineColor transparent transparent;
+                    position: absolute;
+                    left: 50%;
+                    top: -$triangleSize/2;
+                    transform: translateX(-50%);
+                }
+            }
+        }
+        &.has-children > .vue-ftree-node-content > .vue-ftree-node-content-inner::after{
+            content: '';
+            display: block;
+            width: 1px;
+            height: $childrenSpace / 2;
+            background-color: $lineColor;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+        }
+        .vue-ftree-children{
+            display: flex;
+            width: 100%;
+            align-items: flex-start;
+            justify-content: space-between;
+            padding-top: $childrenSpace;
+            position: relative;
+        }
+    }
+}
